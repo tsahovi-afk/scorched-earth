@@ -6,8 +6,7 @@ const path = require('path');
 
 // התיקון הקריטי: השרת ישלח את הקובץ public ישירות כשנכנסים לדף הבית
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public'));
-});
+res.sendFile(path.join(__dirname, 'public.html'));});
 
 let players = {};
 let turn = null;
