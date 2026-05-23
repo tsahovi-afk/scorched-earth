@@ -1,0 +1,13 @@
+{
+  "name": "scorched-earth-online",
+  "version": "1.0.0",
+  "description": "Scorched Earth Multiplayer",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.18.2",
+    "socket.io": "^4.7.2"
+  },
+  "engines": {
+    "node": ">=16"
+  }
+}
