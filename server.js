@@ -4,19 +4,19 @@ const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 const path = require('path');
 
-// הגדרת תיקיית public להגשת קבצים סטטיים
-app.use(express.static(path.join(__dirname, 'public')));
+// התיקון הקריטי: השרת ישלח את הקובץ public ישירות כשנכנסים לדף הבית
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public'));
+});
 
 let players = {};
 let turn = null;
 
 io.on('connection', (socket) => {
-    // אם אין שחקנים, השחקן הראשון הוא צהובי
     if (Object.keys(players).length === 0) {
         players[socket.id] = { id: socket.id, x: 150, color: '#ffcc00', name: 'צהובי' };
         socket.emit('init', { id: socket.id, side: 'left', players });
     } 
-    // השחקן השני הוא שחקן 2
     else if (Object.keys(players).length === 1) {
         players[socket.id] = { id: socket.id, x: 650, color: '#ff3333', name: 'שחקן 2' };
         socket.emit('init', { id: socket.id, side: 'right', players });
